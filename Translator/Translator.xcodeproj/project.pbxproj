@@ -13,10 +13,12 @@
 		000AA402217D7A05004A8580 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 000AA400217D7A05004A8580 /* LaunchScreen.storyboard */; };
 		000AA405217D7A05004A8580 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 000AA404217D7A05004A8580 /* main.m */; };
 		000AA411217D86A2004A8580 /* ParentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 000AA410217D86A2004A8580 /* ParentViewController.m */; };
+		004EC83821801EA8002FB5BF /* KeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 004EC83721801EA8002FB5BF /* KeyChainStore.m */; };
 		00EAB03A217ED6B2002DA2DB /* DetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00EAB039217ED6B2002DA2DB /* DetailCell.m */; };
 		00EAB03D217ED6F9002DA2DB /* ImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00EAB03C217ED6F9002DA2DB /* ImageCell.m */; };
 		00EAB043217F0FA2002DA2DB /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00EAB03F217F0FA2002DA2DB /* SideMenuViewController.m */; };
 		00EAB044217F0FA2002DA2DB /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00EAB040217F0FA2002DA2DB /* MainViewController.m */; };
+		00EAB047217F19BB002DA2DB /* WKWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00EAB046217F19BB002DA2DB /* WKWebViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		000AA404217D7A05004A8580 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		000AA40F217D86A2004A8580 /* ParentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParentViewController.h; path = Translator/Class/ParentViewController.h; sourceTree = SOURCE_ROOT; };
 		000AA410217D86A2004A8580 /* ParentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParentViewController.m; path = Translator/Class/ParentViewController.m; sourceTree = SOURCE_ROOT; };
+		004EC83621801EA8002FB5BF /* KeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeyChainStore.h; path = Translator/Class/KeyChainStore.h; sourceTree = SOURCE_ROOT; };
+		004EC83721801EA8002FB5BF /* KeyChainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeyChainStore.m; path = Translator/Class/KeyChainStore.m; sourceTree = SOURCE_ROOT; };
 		00EAB038217ED6B2002DA2DB /* DetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailCell.h; path = Translator/Class/DetailCell.h; sourceTree = SOURCE_ROOT; };
 		00EAB039217ED6B2002DA2DB /* DetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailCell.m; path = Translator/Class/DetailCell.m; sourceTree = SOURCE_ROOT; };
 		00EAB03B217ED6F9002DA2DB /* ImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageCell.h; path = Translator/Class/ImageCell.h; sourceTree = SOURCE_ROOT; };
@@ -38,6 +42,8 @@
 		00EAB040217F0FA2002DA2DB /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = View/MainViewController.m; sourceTree = "<group>"; };
 		00EAB041217F0FA2002DA2DB /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = View/MainViewController.h; sourceTree = "<group>"; };
 		00EAB042217F0FA2002DA2DB /* SideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SideMenuViewController.h; path = View/SideMenuViewController.h; sourceTree = "<group>"; };
+		00EAB045217F19BB002DA2DB /* WKWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WKWebViewController.h; path = View/WKWebViewController.h; sourceTree = "<group>"; };
+		00EAB046217F19BB002DA2DB /* WKWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WKWebViewController.m; path = View/WKWebViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +92,8 @@
 		000AA40E217D8686004A8580 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				004EC83621801EA8002FB5BF /* KeyChainStore.h */,
+				004EC83721801EA8002FB5BF /* KeyChainStore.m */,
 				00EAB03B217ED6F9002DA2DB /* ImageCell.h */,
 				00EAB03C217ED6F9002DA2DB /* ImageCell.m */,
 				00EAB038217ED6B2002DA2DB /* DetailCell.h */,
@@ -104,6 +112,8 @@
 				00EAB040217F0FA2002DA2DB /* MainViewController.m */,
 				00EAB042217F0FA2002DA2DB /* SideMenuViewController.h */,
 				00EAB03F217F0FA2002DA2DB /* SideMenuViewController.m */,
+				00EAB045217F19BB002DA2DB /* WKWebViewController.h */,
+				00EAB046217F19BB002DA2DB /* WKWebViewController.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -182,9 +192,11 @@
 				000AA411217D86A2004A8580 /* ParentViewController.m in Sources */,
 				00EAB03A217ED6B2002DA2DB /* DetailCell.m in Sources */,
 				00EAB03D217ED6F9002DA2DB /* ImageCell.m in Sources */,
+				004EC83821801EA8002FB5BF /* KeyChainStore.m in Sources */,
 				00EAB044217F0FA2002DA2DB /* MainViewController.m in Sources */,
 				000AA405217D7A05004A8580 /* main.m in Sources */,
 				000AA3F7217D7A03004A8580 /* AppDelegate.m in Sources */,
+				00EAB047217F19BB002DA2DB /* WKWebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

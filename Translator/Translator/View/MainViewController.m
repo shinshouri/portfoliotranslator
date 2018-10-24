@@ -29,16 +29,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [defaults removeObjectForKey:@"ListHistorySearch"];
-//    [defaults removeObjectForKey:@"ListHistoryResult"];
+//    [defaults removeObjectForKey:@"ListHistory"];
     listHistory = [[NSMutableArray alloc] init];
     if ([defaults objectForKey:@"ListHistory"]) {
         listHistory = [[defaults objectForKey:@"ListHistory"] mutableCopy];
     }
-    lang = [[NSArray alloc] initWithObjects:@"Afrikaans", @"Albanian", @"Amharic", @"Arabic", @"Armenian", @"Azeerbaijani", @"Basque", @"Belarusian", @"Bengali", @"Bosnian", @"Bulgarian", @"Catalan", @"Cebuano", @"Chinese (Simplified)", @"Chinese (Traditional)", @"Corsican", @"Croatian", @"Czech", @"Danish", @"Dutch", @"English", @"Esperanto", @"Estonian", @"Finnish", @"French", @"Frisian", @"Galician", @"Georgian", @"German", @"Greek", @"Gujarati", @"Haitain Creole", @"Hausa", @"Hawaiian", @"Hebrew", @"Hindi", @"Hmong", @"Hungarian", @"Icelandic", @"Igbo", @"Indonesian", @"Irish", @"Italian", @"Japanese", @"Javanese", @"Kannada", @"Kazakh", @"Khmer", @"Korean", @"Kurdish", @"Kyrgyz", @"Lao", @"Latin", @"Latvian", @"Lithuanian", @"Luxembourgish", @"Macedonian", @"Malagasy", @"Malay", @"Malayalam", @"Maltese", @"Maori", @"Marathi", @"Mongolian", @"Myanmar(Burmese)", @"Nepali", @"Norwegian", @"Nyanja(Chichewa)", @"Pashto", @"Persian", @"Polish", @"Portuguese", @"Punjabi", @"Romanian", @"Russian", @"Samoan", @"Scots Gaelic", @"Serbian", @"Sesotho", @"Shona", @"Sindhi", @"Sinhala(Sinhalese)", @"Slovak", @"Slovenian", @"Somali", @"Spanish", @"Sundanese", @"Swahili", @"Swedish", @"Tagalog(Filipino)", @"Tajik", @"Tamil", @"Telugu", @"Thai", @"Turkish", @"Ukrainian", @"Urdu", @"Uzbek", @"Vietnamese", @"Welsh", @"Xhosa", @"Yiddish", @"Yoruba", @"Zulu", nil];
+    lang = [[NSArray alloc] initWithObjects:@"Afrikaans", @"Albanian", @"Amharic", @"Arabic", @"Armenian", @"Azeerbaijani", @"Basque", @"Belarusian", @"Bengali", @"Bosnian", @"Bulgarian", @"Catalan", @"Cebuano", @"Chinese(Simplified)", @"Chinese(Traditional)", @"Corsican", @"Croatian", @"Czech", @"Danish", @"Dutch", @"English", @"Esperanto", @"Estonian", @"Finnish", @"French", @"Frisian", @"Galician", @"Georgian", @"German", @"Greek", @"Gujarati", @"Haitain Creole", @"Hausa", @"Hawaiian", @"Hebrew", @"Hindi", @"Hmong", @"Hungarian", @"Icelandic", @"Igbo", @"Indonesian", @"Irish", @"Italian", @"Japanese", @"Javanese", @"Kannada", @"Kazakh", @"Khmer", @"Korean", @"Kurdish", @"Kyrgyz", @"Lao", @"Latin", @"Latvian", @"Lithuanian", @"Luxembourgish", @"Macedonian", @"Malagasy", @"Malay", @"Malayalam", @"Maltese", @"Maori", @"Marathi", @"Mongolian", @"Myanmar(Burmese)", @"Nepali", @"Norwegian", @"Nyanja(Chichewa)", @"Pashto", @"Persian", @"Polish", @"Portuguese", @"Punjabi", @"Romanian", @"Russian", @"Samoan", @"Scots Gaelic", @"Serbian", @"Sesotho", @"Shona", @"Sindhi", @"Sinhala(Sinhalese)", @"Slovak", @"Slovenian", @"Somali", @"Spanish", @"Sundanese", @"Swahili", @"Swedish", @"Tagalog(Filipino)", @"Tajik", @"Tamil", @"Telugu", @"Thai", @"Turkish", @"Ukrainian", @"Urdu", @"Uzbek", @"Vietnamese", @"Welsh", @"Xhosa", @"Yiddish", @"Yoruba", @"Zulu", nil];
     langCode = [[NSArray alloc] initWithObjects:@"af", @"sq", @"am", @"ar", @"hy", @"az", @"eu", @"be", @"bn", @"bs", @"bg", @"ca", @"ceb", @"zh-CN", @"zh-TW", @"co", @"hr", @"cs", @"da", @"nl", @"en", @"eo", @"et", @"fi", @"fr", @"fy", @"gl", @"ka", @"de", @"el", @"gu", @"ht", @"ha", @"haw", @"he**", @"hi", @"hmn", @"hu", @"is", @"ig", @"id", @"ga", @"it", @"ja", @"jw", @"kn", @"kk", @"km", @"ko", @"ku", @"ky", @"lo", @"la", @"lv", @"lt", @"lb", @"mk", @"mg", @"ms", @"ml", @"mt", @"mi", @"mr", @"mn", @"my", @"ne", @"no", @"ny", @"ps", @"fa", @"pl", @"pt", @"pa", @"ro", @"ru", @"sm", @"gd", @"sr", @"st", @"sn", @"sd", @"si", @"sk", @"sl", @"so", @"es", @"su", @"sw", @"sv", @"tl", @"tg", @"ta", @"te", @"th", @"tr", @"uk", @"ur", @"uz", @"vi", @"cy", @"xh", @"yi", @"yo", @"zu", nil];
     
     [self UI];
+    langCode1 = @"en";
+    langCode2 = @"af";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,20 +53,23 @@
     [bgview setContentSize:CGSizeMake(0, 500)];
     
     [bgview addSubview:[self UIImage:self withFrame:CGRectMake((WIDTH/2)-(WIDTH/8)-30, 30, 20, 20) withImageName:@"logo_small"]];
-    [bgview addSubview:[self UILabel:self withFrame:CGRectMake((WIDTH/2)-(WIDTH/8), 30, WIDTH/2, 20) withText:@"Translate App" withTextSize:18 withAlignment:0 withLines:0]];
+    [bgview addSubview:[self UILabel:self withFrame:CGRectMake((WIDTH/2)-(WIDTH/8), 30, WIDTH/2, 20) withText:@"Translate App" withTextSize:20 withAlignment:0 withLines:0]];
     
     view1 = [self UIView:self withFrame:CGRectMake(10, 70, WIDTH-20, HEIGHT/4)];
     [view1 setBackgroundColor:[UIColor whiteColor]];
+    [[view1 layer] setBorderWidth:3];
+    [[view1 layer] setBorderColor:[self colorFromHexString:Color3 withAlpha:0.5].CGColor];
     [[view1 layer] setCornerRadius:10];
     
-    img1 = [self UIImage:self withFrame:CGRectMake(10, 10, 25, 25) withImageName:@"star yellow"];
+    img1 = [self UIImage:self withFrame:CGRectMake(10, 20, 25, 25) withImageName:@"star yellow"];
     [view1 addSubview:img1];
-    lbl1 = [self UILabel:self withFrame:CGRectMake(img1.frame.origin.x+img1.frame.size.width+10, img1.frame.origin.y, WIDTH-img1.frame.size.width, img1.frame.size.height) withText:@"" withTextSize:16 withAlignment:0 withLines:0];
+    lbl1 = [self UILabel:self withFrame:CGRectMake(img1.frame.origin.x+img1.frame.size.width+10, img1.frame.origin.y, WIDTH-img1.frame.size.width, img1.frame.size.height) withText:@"English" withTextSize:16 withAlignment:0 withLines:0];
     [view1 addSubview:lbl1];
-    [view1 addSubview:[self UIImage:self withFrame:CGRectMake((WIDTH/2)+10, 18, 20, 10) withImageName:@"drop arrow"]];
+    [view1 addSubview:[self UIImage:self withFrame:CGRectMake((WIDTH/2)+10, 26, 20, 10) withImageName:@"drop arrow"]];
     [view1 addSubview:[self UIButton:self withFrame:CGRectMake(lbl1.frame.origin.x, lbl1.frame.origin.y, lbl1.frame.size.width, lbl1.frame.size.height) withTitle:@"" withTag:1]];
     
     txt1 = [self UITextView:self withFrame:CGRectMake(img1.frame.origin.x, img1.frame.origin.y+img1.frame.size.height+10, view1.frame.size.width-20, view1.frame.size.height/2) withText:@"Write Something" withSize:20 withInputType:UIKeyboardTypeDefault];
+    [txt1 setText:@"TEST"];
     [txt1 setReturnKeyType:UIReturnKeyGo];
     [txt1 setTag:1];
     [view1 addSubview:txt1];
@@ -73,13 +77,15 @@
     
     view2 = [self UIView:self withFrame:CGRectMake(10, view1.frame.origin.y+view1.frame.size.height+10, WIDTH-20, HEIGHT/4)];
     [view2 setBackgroundColor:[UIColor whiteColor]];
+    [[view2 layer] setBorderWidth:3];
+    [[view2 layer] setBorderColor:[self colorFromHexString:Color3 withAlpha:0.5].CGColor];
     [[view2 layer] setCornerRadius:10];
     
-    img2 = [self UIImage:self withFrame:CGRectMake(10, 10, 25, 25) withImageName:@"star yellow"];
+    img2 = [self UIImage:self withFrame:CGRectMake(10, 20, 25, 25) withImageName:@"star yellow"];
     [view2 addSubview:img2];
-    lbl21 = [self UILabel:self withFrame:CGRectMake(img2.frame.origin.x+img2.frame.size.width+10, img2.frame.origin.y, WIDTH-img2.frame.size.width, img2.frame.size.height) withText:@"" withTextSize:16 withAlignment:0 withLines:0];
+    lbl21 = [self UILabel:self withFrame:CGRectMake(img2.frame.origin.x+img2.frame.size.width+10, img2.frame.origin.y, WIDTH-img2.frame.size.width, img2.frame.size.height) withText:@"Afrikaans" withTextSize:16 withAlignment:0 withLines:0];
     [view2 addSubview:lbl21];
-    [view2 addSubview:[self UIImage:self withFrame:CGRectMake((WIDTH/2)+10, 18, 20, 10) withImageName:@"drop arrow"]];
+    [view2 addSubview:[self UIImage:self withFrame:CGRectMake((WIDTH/2)+10, 26, 20, 10) withImageName:@"drop arrow"]];
     [view2 addSubview:[self UIButton:self withFrame:CGRectMake(lbl21.frame.origin.x, lbl21.frame.origin.y, lbl21.frame.size.width, lbl21.frame.size.height) withTitle:@"" withTag:2]];
     
     lbl22 = [self UITextView:self withFrame:CGRectMake(img2.frame.origin.x, img2.frame.origin.y+img2.frame.size.height+10, view2.frame.size.width-20, view2.frame.size.height/2) withText:@"" withSize:20 withInputType:UIKeyboardTypeDefault];
@@ -89,12 +95,12 @@
     [view2 addSubview:lbl22];
     [bgview addSubview:view2];
     
-    UIButton *swap = [self UIButton:self withFrame:CGRectMake((WIDTH/2)-45, view1.frame.origin.y+view1.frame.size.height-45, 80, 80) withTitle:@"" withTag:3];
+    UIButton *swap = [self UIButton:self withFrame:CGRectMake((WIDTH/2)-40, view1.frame.origin.y+view1.frame.size.height-35, 80, 80) withTitle:@"" withTag:3];
     [swap setImage:[UIImage imageNamed:@"switch button"] forState:UIControlStateNormal];
 //    [swap sizeToFit];
     [bgview addSubview:swap];
     
-    [bgview addSubview:[self UILabelwithBlackText:self withFrame:CGRectMake(10, view2.frame.origin.y+view2.frame.size.height+10, WIDTH-20, 50) withText:@"History" withTextSize:16 withAlignment:0 withLines:0]];
+    [bgview addSubview:[self UILabelwithBlackText:self withFrame:CGRectMake(10, view2.frame.origin.y+view2.frame.size.height+10, WIDTH-20, 50) withText:History withTextSize:22 withAlignment:0 withLines:0]];
     
     table = [self UITableView:self withFrame:CGRectMake(10, view2.frame.origin.y+view2.frame.size.height+70, WIDTH-20, HEIGHT-(view2.frame.origin.y+view2.frame.size.height+80)) withStyle:0];
     [table setBackgroundColor:[UIColor clearColor]];
@@ -129,19 +135,6 @@
     }
     else if([sender tag] == 3)
     {
-//        NSString *swap1 = [lbl1 text];
-//        NSString *swap2 = [lbl21 text];
-//        NSString *codeswap1 = langCode1;
-//        NSString *codeswap2 = langCode2;
-//        NSString *result1 = [txt1 text];
-//        NSString *result2 = [lbl22 text];
-//        [lbl1 setText:swap2];
-//        [lbl21 setText:swap1];
-//        langCode1 = codeswap2;
-//        langCode2 = codeswap1;
-//        [txt1 setText:result2];
-//        [lbl22 setText:result1];
-        
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
             //code with animation
             CGRect viewone = self->view1.frame;
@@ -190,6 +183,9 @@
     
     UIView *viewd = [self UIView:self withFrame:CGRectMake(10, 70, WIDTH-20, HEIGHT/4)];
     [viewd setBackgroundColor:[UIColor whiteColor]];
+    [[viewd layer] setBorderWidth:3];
+    [[viewd layer] setBorderColor:[self colorFromHexString:Color3 withAlpha:0.5].CGColor];
+    [[viewd layer] setCornerRadius:10];
     
 //    [view1 addSubview:[self UIImage:self withFrame:CGRectMake(10, 10, 25, 25) withImageName:@"star yellow"]];
 //    [view1 addSubview:[self UILabel:self withFrame:CGRectMake(img1.frame.origin.x+img1.frame.size.width+10, img1.frame.origin.y, WIDTH-img1.frame.size.width, img1.frame.size.height) withText:[lbl1 text] withTextSize:16 withAlignment:0 withLines:0]];
@@ -200,6 +196,9 @@
     
     UIView *viewd2 = [self UIView:self withFrame:CGRectMake(10, viewd.frame.origin.y+viewd.frame.size.height+10, WIDTH-20, HEIGHT/4)];
     [viewd2 setBackgroundColor:[UIColor whiteColor]];
+    [[viewd2 layer] setBorderWidth:3];
+    [[viewd2 layer] setBorderColor:[self colorFromHexString:Color3 withAlpha:0.5].CGColor];
+    [[viewd2 layer] setCornerRadius:10];
     
 //    [view2 addSubview:[self UIImage:self withFrame:CGRectMake(10, 10, 25, 25) withImageName:@"star yellow"]];
 //    [view2 addSubview:[self UILabel:self withFrame:CGRectMake(img2.frame.origin.x+img2.frame.size.width+10, img2.frame.origin.y, WIDTH-img2.frame.size.width, img2.frame.size.height) withText:[lbl21 text] withTextSize:16 withAlignment:0 withLines:0]];
@@ -212,18 +211,26 @@
     [[self view] addSubview:detail];
 }
 
--(void)showAds {
+-(void)showAds:(NSString*)url {
     dispatch_async(dispatch_get_global_queue(0,0), ^{
-        NSData * data = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: @"https://upload.wikimedia.org/wikipedia/commons/b/b3/Campania_banner_View_from_Capri.jpg"]];
+        NSData * data = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString:url]];
         if ( data == nil )
             return;
         dispatch_async(dispatch_get_main_queue(), ^{
+            [self->maskView removeFromSuperview];
             [self->ads removeFromSuperview];
             self->ads = [self UIView:self withFrame:CGRectMake(0, HEIGHT-150, WIDTH, 150)];
             UIImageView *imgads = [self UIImage:self withFrame:CGRectMake(0, 0, WIDTH, self->ads.frame.size.height) withImageName:@"logo_small"];
             imgads.image = [UIImage imageWithData:data];
             [self->ads addSubview:imgads];
-            [self->ads addSubview:[self UIButton:self withFrame:CGRectMake(WIDTH-40, 0, 40,40) withTitle:@"X" withTag:4]];
+            
+            UIButton *btn = [self UIButton:self withFrame:CGRectMake(WIDTH-100, 0, 100, 30) withTitle:@"Close Ads" withTag:4];
+            [btn setBackgroundColor:[UIColor whiteColor]];
+            [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [[btn layer] setBorderWidth:3];
+            [[btn layer] setBorderColor:[UIColor blackColor].CGColor];
+            [[btn layer] setCornerRadius:10];
+            [self->ads addSubview:btn];
             
             [[self view] addSubview:self->ads];
         });
@@ -257,8 +264,8 @@
 //    cell.accessoryType = UITableViewCellAccessoryDetailButton;
     
     cell.backgroundColor = [UIColor whiteColor];
-    cell.layer.borderWidth = 5;
-    cell.layer.borderColor = [self colorFromHexString:Color3 withAlpha:1.0].CGColor;
+    cell.layer.borderWidth = 3;
+    cell.layer.borderColor = [self colorFromHexString:Color3 withAlpha:0.5].CGColor;
     cell.layer.cornerRadius = 10;
     cell.clipsToBounds = TRUE;
     
@@ -335,14 +342,14 @@
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     if ([text isEqualToString:@"\n"]) {
-        [self RequestData:self];
+        [self RequestAPITranslate:self];
     }
     
     return textView.text.length + (text.length - range.length) <= 85;
 }
 
 #pragma mark - API
--(void)RequestData:(id)sender {
+-(void)RequestAPITranslate:(id)sender {
     @try {
         [picker1 setHidden:YES];
         [picker2 setHidden:YES];
@@ -363,7 +370,6 @@
             
             NSURLSessionDataTask * dataTask =[defaultSession dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *responses, NSError *error)
             {
-                NSLog(@"Response:%@ %@\n", responses, error);
                 if(error == nil)
                 {
                     self->response = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
@@ -381,10 +387,47 @@
                             [self->defaults setObject:self->listHistory forKey:@"ListHistory"];
                             [self->table reloadData];
                         }
+                        [self RequestAPIAds:self];
                     });
                 }
             }];
         [dataTask resume];
+        });
+    } @catch(NSException *exception) {
+        
+    }
+}
+
+-(void)RequestAPIAds:(id)sender {
+    @try {
+        [picker1 setHidden:YES];
+        [picker2 setHidden:YES];
+        [[self view] endEditing:YES];
+        [[self view] addSubview:[self showmask]];
+        response = nil;
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+            
+            NSURL * url = [NSURL URLWithString:@"http://47.75.13.70/advertising/ReqAppAd.php"];
+            NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
+            NSString * paramstr = [NSString stringWithFormat:@"bundle_id=%@&seq_num=1", [[NSBundle mainBundle] bundleIdentifier]];
+            [urlRequest setHTTPMethod:@"POST"];
+            [urlRequest setHTTPBody:[paramstr dataUsingEncoding:NSUTF8StringEncoding]];
+            
+            NSURLSessionDataTask * dataTask =[defaultSession dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *responses, NSError *error)
+                                              {
+                                                  if(error == nil)
+                                                  {
+                                                      self->response = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                                                      NSLog(@"%@", [[self->response objectForKey:@"advertise"] objectAtIndex:0]);
+                                                      dispatch_async(dispatch_get_main_queue(), ^{
+                                                          [self showAds:[[[self->response objectForKey:@"advertise"] objectAtIndex:0] objectForKey:@"url"]];
+                                                      });
+                                                  }
+                                              }];
+            [dataTask resume];
         });
     } @catch(NSException *exception) {
         

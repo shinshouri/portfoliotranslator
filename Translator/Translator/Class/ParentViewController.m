@@ -26,8 +26,8 @@
     //background image
     [bgimage removeFromSuperview];
     bgimage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT)];
-//    [bgimage setImage:[UIImage imageNamed:@"bgwhite.png"]];
-    [bgimage setBackgroundColor:[self colorFromHexString:Color3 withAlpha:1.0]];
+    [bgimage setImage:[UIImage imageNamed:@"BG"]];
+//    [bgimage setBackgroundColor:[self colorFromHexString:Color3 withAlpha:1.0]];
     [[self view] addSubview:bgimage];
     
     //Gradient background
@@ -72,6 +72,7 @@
 //    [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationWillResignActiveNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification* notification){
 //        [alert dismissWithClickedButtonIndex:0 animated:NO];
 //    }];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -93,14 +94,6 @@
 //    view.backgroundColor = [self colorFromHexString:@"#FAFAFA" withAlpha:1.0];
     return view;
 }
-
-//-(UIImageView*)UIImageServer:(id)sender withFrame:(CGRect)frame withImageName:(NSString *)name  {
-//    UIImageView *img = [[UIImageView alloc] init];
-//    img.frame = frame;
-//    img.image = [PCUtils getImageFromFolder:@"img" andFilename:name];
-//    img.backgroundColor = [UIColor clearColor];
-//    return img;
-//}
 
 -(UIImageView*)UIImage:(id)sender withFrame:(CGRect)frame withImageName:(NSString *)name  {
     UIImageView *img = [[UIImageView alloc] init];
@@ -169,6 +162,7 @@
 
 -(UITextView*)UITextView:(id)sender withFrame:(CGRect)frame withText:(NSString *)text withSize:(int)size withInputType:(UIKeyboardType)input {
     UITextView *txt = [[UITextView alloc] initWithFrame:frame];
+    txt.textColor = [self colorFromHexString:Color7 withAlpha:1.0];
     txt.font = [UIFont systemFontOfSize:size];
     txt.keyboardType = input;
     txt.backgroundColor = [UIColor clearColor];
@@ -205,7 +199,6 @@
     [picker setDelegate:sender];
     [picker setTag:tag];
     [picker setBackgroundColor:[UIColor lightGrayColor]];
-    
     return picker;
 }
 
@@ -213,9 +206,7 @@
     UISwitch *switcher = [[UISwitch alloc] initWithFrame:frame];
     [switcher setOn:YES];
     [switcher setTag:99];
-    [switcher addTarget:self
-                      action:@selector(Act:)
-            forControlEvents:UIControlEventValueChanged];
+    [switcher addTarget:self action:@selector(Act:) forControlEvents:UIControlEventValueChanged];
     return switcher;
 }
 
@@ -273,7 +264,6 @@
             nextpadleft = nextpadleft + (lebar-(size*column))/(column+1) + size;
         }
     }
-    
     return scrollview;
 }
 
@@ -425,6 +415,15 @@
     return [emailTest evaluateWithObject:checkString];
 }
 
+-(NSString*)getDeviceID {
+    
+    if ([KeyChainStore load:@"DeviceID"]) {
+        return [KeyChainStore load:@"DeviceID"];
+    }
+    [KeyChainStore save:@"DeviceID" data:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+    return [KeyChainStore load:@"DeviceID"];
+}
+
 #pragma mark - Alert
 - (void)showAlert:(NSString*)alertMessage title:(NSString*)title btn:(NSString*)btn tag:(int)tag delegate:(id)delegate {
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -451,22 +450,6 @@
     });
 }
 
--(void)showRedAlert:(NSString*)alertMessage title:(NSString*)title {
-    redAlert = [self UIView:self withFrame:CGRectMake(0, 70, [self view].frame.size.width, 50)];
-    [redAlert setBackgroundColor:[UIColor redColor]];
-    [redAlert addSubview:[self UILabelwithWhiteText:self withFrame:CGRectMake(20, 0, redAlert.frame.size.width-40, redAlert.frame.size.height) withText:alertMessage withTextSize:textsize12 withAlignment:0 withLines:0]];
-    [redAlert addSubview:[self UIImage:self withFrame:CGRectMake(redAlert.frame.size.width-20, 20, 10, 10) withImageName:@"Close.png"]];
-    UIButton *x = [self UIButton:self withFrame:CGRectMake(redAlert.frame.size.width-20, 10, 20, 20) withTitle:@"" withTag:123];
-    [x addTarget:self action:@selector(closeview) forControlEvents:UIControlEventTouchUpInside];
-//    [x setImage:[UIImage imageNamed:@"Close.png"] forState:UIControlStateNormal];
-    [redAlert addSubview:x];
-    [[self view] addSubview:redAlert];
-}
-
--(void)closeview {
-    [redAlert removeFromSuperview];
-}
-
 -(void)respondToTapGesture {
     [[self view] endEditing:YES];
 }
@@ -486,7 +469,6 @@
             sc = sc + 1;
         }
     }
-    
 }
 
 #pragma mark - Segue Delegate
@@ -531,6 +513,7 @@
         
     }
 }
+
 //-(void)RequestData:(id)sender withAction:(NSString*)action withParams:(NSDictionary*)params {
 //    @try {
 //        if(params == nil) {
@@ -603,8 +586,6 @@
 //    return result;
 //
 //}
-
-/*========================================EDITING========================================*/
 
 -(NSString*)RandomNumber:(int)digit {
     NSString *a=@"";
@@ -719,7 +700,7 @@
     NSString* isAppStore() {
         
 #if TARGET_IPHONE_SIMULATOR
-        return NO;
+        return @"NO";
 #else
         NSString *provisionPath = [[NSBundle mainBundle] pathForResource:@"embedded" ofType:@"mobileprovision"];
         

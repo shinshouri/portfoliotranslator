@@ -6,10 +6,10 @@
 
 #import <UIKit/UIKit.h>
 #import <JavaScriptCore/JavaScriptCore.h>
+#import "KeyChainStore.h"
 
-#define DEVICEID [PCUtils getDeviceID]
+#define DEVICEID [self getDeviceID]
 #define DEVICETOKEN [defaults objectForKey:@"ApnsDeviceToken"]
-#define TOUCHIDPIN @"hmnj8hukhjj823"
 
 #define WIDTH [self view].frame.size.width
 #define HEIGHT [self view].frame.size.height
@@ -35,6 +35,9 @@
 #define Color10 @"#20C3DC" //itemtabbar(32, 195, 220)
 #define Color11 @"#0B8CED" //(11, 140, 237)
 
+//Language
+#define History [[defaults objectForKey:@"language"] isEqualToString:@"id"] ? @"Sejarah" : @"History"
+
 //Static Message
 #define MSGResponseNil L(@"connectionTimeout")
 
@@ -52,10 +55,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 //UI
--(UIView *)ECardAssets:(id)sender withFrame:(CGRect)frame withImage:(NSString*)name withBalance:(NSString*)balance withCardNumber:(NSString*)cardnumber withCardType:(NSString*)cardtype withTag:(int)i;
--(UIView *)CardAssets:(id)sender withFrame:(CGRect)frame withImage:(NSString*)name withBalance:(NSString*)balance withCardNumber:(NSString*)cardnumber withCardExp:(NSString*)cardexp withCardType:(NSString*)cardtype withTag:(int)i;
 -(UIView*)UIView:(id)sender withFrame:(CGRect)frame;
--(UIImageView*)UIImageServer:(id)sender withFrame:(CGRect)frame withImageName:(NSString *)name;
 -(UIImageView*)UIImage:(id)sender withFrame:(CGRect)frame withImageName:(NSString *)name;
 -(UIImageView*)UIImageGIF:(id)sender withFrame:(CGRect)frame withImageName:(NSString*)name;
 -(UILabel*)UILabel:(id)sender withFrame:(CGRect)frame withText:(NSString *)text withTextSize:(int)size withAlignment:(int)Align withLines:(int)line;
@@ -81,6 +81,9 @@
 - (UIViewController*)topViewController;
 -(void)GotoPage:(id)sender withIdentifier:(NSString*)Identifier;
 -(BOOL)IsValidEmail:(NSString *)checkString;
+-(NSString*)getDeviceID;
+
+
 -(NSString*)encryptHSM:(NSString*)values withRNumber:(NSString*)rnmbr withVal:(NSString*)val withExpo:(NSString*)expo;
 -(NSString*)encryptHSMPIN:(NSString*)value1 :(NSString*)value2 withRNumber:(NSString*)rnmbr withVal:(NSString*)val withExpo:(NSString*)expo;
 
@@ -91,7 +94,6 @@
 //Alert
 -(void)showAlert:(NSString*)alertMessage title:(NSString*)title btn:(NSString*)btn tag:(int)tag delegate:(id)delegate;
 -(void)showAlert2:(NSString*)alertMessage title:(NSString*)title btn1:(NSString*)btn1 btn2:(NSString*)btn2 tag:(int)tag delegate:(id)delegate;
--(void)showRedAlert:(NSString*)alertMessage title:(NSString*)title;
 -(void)copyright:(id)delegate :(NSString*)A :(NSString*)B;
 
 //Networking

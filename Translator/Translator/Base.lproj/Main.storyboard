@@ -26,6 +26,22 @@
             </objects>
             <point key="canvasLocation" x="737" y="340"/>
         </scene>
+        <!--Web View Controller-->
+        <scene sceneID="vmb-QI-VS2">
+            <objects>
+                <viewController id="Fce-8h-Hso" customClass="WKWebViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dN4-S7-UxC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Hq2-tT-fG4"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Ica-cI-lND"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iFx-7O-eEK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="682" y="1048"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="n3m-lg-cso">
             <objects>
