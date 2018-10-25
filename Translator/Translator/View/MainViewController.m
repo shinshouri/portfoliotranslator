@@ -25,10 +25,12 @@
     UITextView *txt1, *lbl22;
     NSString *langCode1, *langCode2;
     UITableView *table;
+    UIAlertController *actionSheet1, *actionSheet2;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    [KeyChainStore deleteKeyData:@"PurchaseID"];
 //    [defaults removeObjectForKey:@"ListHistory"];
     listHistory = [[NSMutableArray alloc] init];
     if ([defaults objectForKey:@"ListHistory"]) {
@@ -38,7 +40,7 @@
     langCode = [[NSArray alloc] initWithObjects:@"af", @"sq", @"am", @"ar", @"hy", @"az", @"eu", @"be", @"bn", @"bs", @"bg", @"ca", @"ceb", @"zh-CN", @"zh-TW", @"co", @"hr", @"cs", @"da", @"nl", @"en", @"eo", @"et", @"fi", @"fr", @"fy", @"gl", @"ka", @"de", @"el", @"gu", @"ht", @"ha", @"haw", @"he**", @"hi", @"hmn", @"hu", @"is", @"ig", @"id", @"ga", @"it", @"ja", @"jw", @"kn", @"kk", @"km", @"ko", @"ku", @"ky", @"lo", @"la", @"lv", @"lt", @"lb", @"mk", @"mg", @"ms", @"ml", @"mt", @"mi", @"mr", @"mn", @"my", @"ne", @"no", @"ny", @"ps", @"fa", @"pl", @"pt", @"pa", @"ro", @"ru", @"sm", @"gd", @"sr", @"st", @"sn", @"sd", @"si", @"sk", @"sl", @"so", @"es", @"su", @"sw", @"sv", @"tl", @"tg", @"ta", @"te", @"th", @"tr", @"uk", @"ur", @"uz", @"vi", @"cy", @"xh", @"yi", @"yo", @"zu", nil];
     
     [self UI];
-    langCode1 = @"en";
+    langCode1 = @"af";
     langCode2 = @"af";
 }
 
@@ -52,10 +54,10 @@
     bgview = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT)];
     [bgview setContentSize:CGSizeMake(0, 500)];
     
-    [bgview addSubview:[self UIImage:self withFrame:CGRectMake((WIDTH/2)-(WIDTH/8)-30, 30, 20, 20) withImageName:@"logo_small"]];
-    [bgview addSubview:[self UILabel:self withFrame:CGRectMake((WIDTH/2)-(WIDTH/8), 30, WIDTH/2, 20) withText:@"Translate App" withTextSize:20 withAlignment:0 withLines:0]];
+    [bgview addSubview:[self UIImage:self withFrame:CGRectMake((WIDTH/2)-(WIDTH/8)-30, 35, 20, 20) withImageName:@"logo_small"]];
+    [bgview addSubview:[self UILabel:self withFrame:CGRectMake((WIDTH/2)-(WIDTH/8), 35, WIDTH/2, 20) withText:@"Translate App" withTextSize:20 withAlignment:0 withLines:0]];
     
-    view1 = [self UIView:self withFrame:CGRectMake(10, 70, WIDTH-20, HEIGHT/4)];
+    view1 = [self UIView:self withFrame:CGRectMake(10, 75, WIDTH-20, HEIGHT/4)];
     [view1 setBackgroundColor:[UIColor whiteColor]];
     [[view1 layer] setBorderWidth:3];
     [[view1 layer] setBorderColor:[self colorFromHexString:Color3 withAlpha:0.5].CGColor];
@@ -63,13 +65,13 @@
     
     img1 = [self UIImage:self withFrame:CGRectMake(10, 20, 25, 25) withImageName:@"star yellow"];
     [view1 addSubview:img1];
-    lbl1 = [self UILabel:self withFrame:CGRectMake(img1.frame.origin.x+img1.frame.size.width+10, img1.frame.origin.y, WIDTH-img1.frame.size.width, img1.frame.size.height) withText:@"English" withTextSize:16 withAlignment:0 withLines:0];
+    lbl1 = [self UILabel:self withFrame:CGRectMake(img1.frame.origin.x+img1.frame.size.width+10, img1.frame.origin.y, WIDTH-img1.frame.size.width, img1.frame.size.height) withText:@"Afrikaans" withTextSize:16 withAlignment:0 withLines:0];
     [view1 addSubview:lbl1];
     [view1 addSubview:[self UIImage:self withFrame:CGRectMake((WIDTH/2)+10, 26, 20, 10) withImageName:@"drop arrow"]];
-    [view1 addSubview:[self UIButton:self withFrame:CGRectMake(lbl1.frame.origin.x, lbl1.frame.origin.y, lbl1.frame.size.width, lbl1.frame.size.height) withTitle:@"" withTag:1]];
+    [view1 addSubview:[self UIButton:self withFrame:CGRectMake(lbl1.frame.origin.x, lbl1.frame.origin.y, lbl1.frame.size.width, lbl1.frame.size.height+5) withTitle:@"" withTag:1]];
     
-    txt1 = [self UITextView:self withFrame:CGRectMake(img1.frame.origin.x, img1.frame.origin.y+img1.frame.size.height+10, view1.frame.size.width-20, view1.frame.size.height/2) withText:@"Write Something" withSize:20 withInputType:UIKeyboardTypeDefault];
-    [txt1 setText:@"TEST"];
+    txt1 = [self UITextView:self withFrame:CGRectMake(img1.frame.origin.x, img1.frame.origin.y+img1.frame.size.height+10, view1.frame.size.width-20, view1.frame.size.height/2) withText:@"" withSize:20 withInputType:UIKeyboardTypeDefault];
+    [txt1 setText:@""];
     [txt1 setReturnKeyType:UIReturnKeyGo];
     [txt1 setTag:1];
     [view1 addSubview:txt1];
@@ -86,7 +88,7 @@
     lbl21 = [self UILabel:self withFrame:CGRectMake(img2.frame.origin.x+img2.frame.size.width+10, img2.frame.origin.y, WIDTH-img2.frame.size.width, img2.frame.size.height) withText:@"Afrikaans" withTextSize:16 withAlignment:0 withLines:0];
     [view2 addSubview:lbl21];
     [view2 addSubview:[self UIImage:self withFrame:CGRectMake((WIDTH/2)+10, 26, 20, 10) withImageName:@"drop arrow"]];
-    [view2 addSubview:[self UIButton:self withFrame:CGRectMake(lbl21.frame.origin.x, lbl21.frame.origin.y, lbl21.frame.size.width, lbl21.frame.size.height) withTitle:@"" withTag:2]];
+    [view2 addSubview:[self UIButton:self withFrame:CGRectMake(lbl21.frame.origin.x, lbl21.frame.origin.y, lbl21.frame.size.width, lbl21.frame.size.height+5) withTitle:@"" withTag:2]];
     
     lbl22 = [self UITextView:self withFrame:CGRectMake(img2.frame.origin.x, img2.frame.origin.y+img2.frame.size.height+10, view2.frame.size.width-20, view2.frame.size.height/2) withText:@"" withSize:20 withInputType:UIKeyboardTypeDefault];
     [lbl22 setEditable:NO];
@@ -100,38 +102,79 @@
 //    [swap sizeToFit];
     [bgview addSubview:swap];
     
-    [bgview addSubview:[self UILabelwithBlackText:self withFrame:CGRectMake(10, view2.frame.origin.y+view2.frame.size.height+10, WIDTH-20, 50) withText:History withTextSize:22 withAlignment:0 withLines:0]];
+    [bgview addSubview:[self UILabelwithBlackText:self withFrame:CGRectMake(20, view2.frame.origin.y+view2.frame.size.height+10, WIDTH-40, 50) withText:History withTextSize:22 withAlignment:0 withLines:0]];
     
     table = [self UITableView:self withFrame:CGRectMake(10, view2.frame.origin.y+view2.frame.size.height+70, WIDTH-20, HEIGHT-(view2.frame.origin.y+view2.frame.size.height+80)) withStyle:0];
     [table setBackgroundColor:[UIColor clearColor]];
     [bgview addSubview: table];
     
-    [bgview addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondToGesture)]];
     [[self view] addSubview:bgview];
     
-    [picker1 removeFromSuperview];
-    picker1 = [self UIPickerView:self withFrame:CGRectMake(0, HEIGHT-200, WIDTH, 200) withTag:1];
-    [picker1 setHidden:YES];
-    [[self view] addSubview: picker1];
+//    [picker1 removeFromSuperview];
+//    picker1 = [self UIPickerView:self withFrame:CGRectMake(0, HEIGHT-200, WIDTH, 200) withTag:1];
+//    [picker1 setHidden:YES];
+//    [[self view] addSubview: picker1];
+//
+//    [picker2 removeFromSuperview];
+//    picker2 = [self UIPickerView:self withFrame:CGRectMake(0, HEIGHT-200, WIDTH, 200) withTag:2];
+//    [picker2 setHidden:YES];
+//    [[self view] addSubview: picker2];
     
-    [picker2 removeFromSuperview];
-    picker2 = [self UIPickerView:self withFrame:CGRectMake(0, HEIGHT-200, WIDTH, 200) withTag:2];
-    [picker2 setHidden:YES];
-    [[self view] addSubview: picker2];
+    actionSheet1 = [UIAlertController alertControllerWithTitle:@"" message:@"Language" preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [actionSheet1 addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        // Cancel button tappped.
+        [self dismissViewControllerAnimated:YES completion:^{
+        }];
+    }]];
+    
+    for (int i = 0; i < [lang count]; i++) {
+        [actionSheet1 addAction:[UIAlertAction actionWithTitle:[lang objectAtIndex:i] style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            // OK button tapped.
+            [self->lbl1 setText:[self->lang objectAtIndex:i]];
+            self->langCode1 = [self->langCode objectAtIndex:i];
+            [self dismissViewControllerAnimated:YES completion:^{
+            }];
+        }]];
+    }
+    
+    actionSheet2 = [UIAlertController alertControllerWithTitle:@"" message:@"Language" preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [actionSheet2 addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        // Cancel button tappped.
+        [self dismissViewControllerAnimated:YES completion:^{
+        }];
+    }]];
+    
+    for (int i = 0; i < [lang count]; i++) {
+        [actionSheet2 addAction:[UIAlertAction actionWithTitle:[lang objectAtIndex:i] style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            // OK button tapped.
+            [self->lbl21 setText:[self->lang objectAtIndex:i]];
+            self->langCode2 = [self->langCode objectAtIndex:i];
+            [self dismissViewControllerAnimated:YES completion:^{
+            }];
+        }]];
+    }
 }
 
 -(void)Act:(id)sender {
     if([sender tag] == 1)
     {
         [[self view] endEditing:YES];
-        [picker1 setHidden:NO];
-        [picker2 setHidden:YES];
+//        [picker1 setHidden:NO];
+//        [picker2 setHidden:YES];
+        
+        // Present action sheet.
+        [self presentViewController:actionSheet1 animated:YES completion:nil];
     }
     else if([sender tag] == 2)
     {
         [[self view] endEditing:YES];
-        [picker1 setHidden:YES];
-        [picker2 setHidden:NO];
+//        [picker1 setHidden:YES];
+//        [picker2 setHidden:NO];
+        
+        // Present action sheet.
+        [self presentViewController:actionSheet2 animated:YES completion:nil];
     }
     else if([sender tag] == 3)
     {
@@ -166,6 +209,14 @@
     else if([sender tag] == 4)
     {
         [ads removeFromSuperview];
+        [[self view] addSubview:[self showmask]];
+        [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+        if ([SKPaymentQueue canMakePayments]) {
+            NSLog(@"Can Make Payments");
+            [self requestProductData:APPPRODUCT];
+        } else {
+            [self showAlert:@"Can't Make Payments" title:@"Warning!" btn:@"OK" tag:0 delegate:self];
+        }
 //        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=284417350&mt=8&uo=6"] options:@{} completionHandler:nil];
     }
 }
@@ -212,10 +263,8 @@
 }
 
 -(void)showAds:(NSString*)url {
-    dispatch_async(dispatch_get_global_queue(0,0), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSData * data = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString:url]];
-        if ( data == nil )
-            return;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self->maskView removeFromSuperview];
             [self->ads removeFromSuperview];
@@ -227,14 +276,131 @@
             UIButton *btn = [self UIButton:self withFrame:CGRectMake(WIDTH-100, 0, 100, 30) withTitle:@"Close Ads" withTag:4];
             [btn setBackgroundColor:[UIColor whiteColor]];
             [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [[btn layer] setBorderWidth:3];
+            [[btn layer] setBorderWidth:1];
             [[btn layer] setBorderColor:[UIColor blackColor].CGColor];
             [[btn layer] setCornerRadius:10];
             [self->ads addSubview:btn];
             
             [[self view] addSubview:self->ads];
-        });
+        });        
     });
+}
+
+#pragma mark - In-App Purchase
+- (void)requestProductData:(NSString *)productID
+{
+    NSArray *pruductArr = [[NSArray alloc] initWithObjects:productID, nil];
+    NSSet *productSet = [NSSet setWithArray:pruductArr];
+    NSLog(@"requestProductData : %@", productSet);
+    SKProductsRequest *request = [[SKProductsRequest alloc] initWithProductIdentifiers:productSet];
+    request.delegate = self;
+    [request start];
+}
+
+- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
+{
+    NSArray *productArr = response.products;
+    NSLog(@"didReceiveResponse : %@", productArr);
+    if (productArr.count == 0) {
+        [maskView removeFromSuperview];
+        [self showAlert:@"Invalid Product." title:@"Warning!" btn:@"OK" tag:0 delegate:self];
+        return;
+    }
+    
+    SKProduct *p = nil;
+    // SKProduct 产品模型
+    for (SKProduct *pro in productArr) {
+        if ([pro.productIdentifier isEqualToString:APPPRODUCT]) {
+            p = pro;
+        }
+    }
+    
+    SKPayment *payment = [SKPayment paymentWithProduct:p];
+    
+    //发送内购请求
+    [[SKPaymentQueue defaultQueue] addPayment:payment];
+    NSLog(@"AddPayment : %@", productArr);
+}
+
+- (void)requestDidFinish:(SKRequest *)request {
+    [maskView removeFromSuperview];
+}
+
+- (void)request:(SKRequest *)request didFailWithError:(NSError *)error {
+    [maskView removeFromSuperview];
+    [self showAlert:@"Failed!" title:@"Warning" btn:@"OK" tag:0 delegate:self];
+}
+
+- (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
+{
+    NSLog(@"%@", @"paymentQueue");
+    
+    for (SKPaymentTransaction *transaction in transactions) {
+        NSString *temptransactionReceipt =
+        [[NSString alloc] initWithData:transaction.transactionReceipt encoding:NSUTF8StringEncoding];
+        NSString *base64 = [JoDess encodeBase64WithString:temptransactionReceipt];
+        base64 = [base64 stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        base64 = [base64 stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+        base64 = [base64 stringByReplacingOccurrencesOfString:@"+" withString:@"%2B"];
+        
+        switch (transaction.transactionState) {
+                // Call the appropriate custom method for the transaction state.
+            case SKPaymentTransactionStatePurchasing:
+                NSLog(@"%@", @"SKPaymentTransactionStatePurchasing");
+                [maskView removeFromSuperview];
+                [[self view] addSubview:[self showmask]];
+                break;
+            case SKPaymentTransactionStateDeferred:
+                NSLog(@"%@", @"SKPaymentTransactionStateDeferred");
+                break;
+            case SKPaymentTransactionStatePurchased:
+                [self completeTransaction:base64 payModel:transaction];
+                break;
+            case SKPaymentTransactionStateFailed:
+                [maskView removeFromSuperview];
+                NSLog(@"%@",transaction.error.localizedDescription);
+                NSLog(@"%@", @"SKPaymentTransactionStateFailed");
+                break;
+            case SKPaymentTransactionStateRestored:
+                NSLog(@"%@", @"SKPaymentTransactionStateRestored");
+                break;
+            default:
+                // For debugging
+                NSLog(@"Unexpected transaction state %@", @(transaction.transactionState));
+                break;
+        }
+    }
+}
+
+- (void)completeTransaction:(NSString *)baseString payModel:(SKPaymentTransaction *)transaction
+{
+    NSLog(@"%@", @"completeTransaction");
+    [maskView removeFromSuperview];
+    [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+    [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
+    [self RequestAPIAppPurchaseAds:self];
+}
+
+#pragma mark - Alertview Delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ([alertView tag] == 1) {
+        if(buttonIndex == 1)
+        {
+            
+        }
+    }
+}
+
+#pragma mark - Textview data source
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    //handle user taps text view to type text
+    [bgview addGestureRecognizer:tapRecognizer];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    //handle text editing finished
+    [bgview removeGestureRecognizer:tapRecognizer];
 }
 
 #pragma mark - Table view data source
@@ -354,6 +520,7 @@
         [picker1 setHidden:YES];
         [picker2 setHidden:YES];
         [[self view] endEditing:YES];
+        [maskView removeFromSuperview];
         [[self view] addSubview:[self showmask]];
         response = nil;
         NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:[txt1 text], @"text", langCode1, @"from", langCode2, @"to", nil];
@@ -373,28 +540,34 @@
                 if(error == nil)
                 {
                     self->response = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-                    NSLog(@"%@", [[self->response objectForKey:@"result"] objectForKey:@"text"]);
+                    NSLog(@"response = %@", [self->response objectForKey:@"result"]);
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self->maskView removeFromSuperview];
                         [self->lbl22 setText:[[self->response objectForKey:@"result"] objectForKey:@"text"]];
-                        if (![[self->lbl22 text] isEqualToString:[self->txt1 text]])
+                        if (![[self->lbl22 text] isEqualToString:[self->txt1 text]] && ![[self->lbl22 text] isEqualToString:@"#ERROR!"])
                         {
                             NSDictionary *dictHist = [NSDictionary dictionaryWithObjectsAndKeys:[self->txt1 text], @"Search", [self->lbl22 text], @"Result", nil];
-                            if ([self->listHistory count] >= 9) {
+                            if ([self->listHistory count] >= 10) {
                                 [self->listHistory removeObjectAtIndex:9];
                             }
                             [self->listHistory insertObject:dictHist atIndex:0];
                             [self->defaults setObject:self->listHistory forKey:@"ListHistory"];
                             [self->table reloadData];
                         }
-                        [self RequestAPIAds:self];
+                        if (!PURCHASEID) {
+                            [self RequestAPIAds:self];
+                        }
                     });
+                }
+                else
+                {
+                    [self->maskView removeFromSuperview];
                 }
             }];
         [dataTask resume];
         });
     } @catch(NSException *exception) {
-        
+        [self->maskView removeFromSuperview];
     }
 }
 
@@ -403,6 +576,7 @@
         [picker1 setHidden:YES];
         [picker2 setHidden:YES];
         [[self view] endEditing:YES];
+        [maskView removeFromSuperview];
         [[self view] addSubview:[self showmask]];
         response = nil;
         
@@ -412,25 +586,73 @@
             
             NSURL * url = [NSURL URLWithString:@"http://47.75.13.70/advertising/ReqAppAd.php"];
             NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
-            NSString * paramstr = [NSString stringWithFormat:@"bundle_id=%@&seq_num=1", [[NSBundle mainBundle] bundleIdentifier]];
+            NSString * paramstr = [NSString stringWithFormat:@"bundle_id=%@&seq_num=1", BUNDLEID];
             [urlRequest setHTTPMethod:@"POST"];
             [urlRequest setHTTPBody:[paramstr dataUsingEncoding:NSUTF8StringEncoding]];
             
             NSURLSessionDataTask * dataTask =[defaultSession dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *responses, NSError *error)
-                                              {
-                                                  if(error == nil)
-                                                  {
-                                                      self->response = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-                                                      NSLog(@"%@", [[self->response objectForKey:@"advertise"] objectAtIndex:0]);
-                                                      dispatch_async(dispatch_get_main_queue(), ^{
-                                                          [self showAds:[[[self->response objectForKey:@"advertise"] objectAtIndex:0] objectForKey:@"url"]];
-                                                      });
-                                                  }
-                                              }];
+            {
+                if(error == nil)
+                {
+                    self->response = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                    NSLog(@"response = %@", [[self->response objectForKey:@"advertise"] objectAtIndex:0]);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self showAds:[[[self->response objectForKey:@"advertise"] objectAtIndex:0] objectForKey:@"url"]];
+                    });
+                }
+                else
+                {
+                    [self->maskView removeFromSuperview];
+                }
+            }];
             [dataTask resume];
         });
     } @catch(NSException *exception) {
+        [self->maskView removeFromSuperview];
+    }
+}
+
+-(void)RequestAPIAppPurchaseAds:(id)sender {
+    @try {
+        [picker1 setHidden:YES];
+        [picker2 setHidden:YES];
+        [[self view] endEditing:YES];
+        [maskView removeFromSuperview];
+        [[self view] addSubview:[self showmask]];
+        response = nil;
         
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+            NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+            
+            NSURL * url = [NSURL URLWithString:@"http://47.75.13.70/app_purchase/App_purchase.php"];
+            NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
+            NSString * paramstr = [NSString stringWithFormat:@"bundle_id=%@", BUNDLEID];
+            [urlRequest setHTTPMethod:@"POST"];
+            [urlRequest setHTTPBody:[paramstr dataUsingEncoding:NSUTF8StringEncoding]];
+            
+            NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *responses, NSError *error)
+            {
+                if(error == nil)
+                {
+                    NSString *jsonString = [JoDess decode:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] key:keyDES];
+                    NSData *datastr = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+                    self->response = [NSJSONSerialization JSONObjectWithData:datastr options:kNilOptions error:&error];
+                    NSLog(@"response = %@", self->response);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self->maskView removeFromSuperview];
+                        [KeyChainStore save:@"PurchaseID" data:[[self->response objectForKey:@"data"] objectForKey:@"uuid"]];
+                    });
+                }
+                else
+                {
+                    [self->maskView removeFromSuperview];
+                }
+            }];
+            [dataTask resume];
+        });
+    } @catch(NSException *exception) {
+        [self->maskView removeFromSuperview];
     }
 }
 /*

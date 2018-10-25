@@ -7,9 +7,14 @@
 #import <UIKit/UIKit.h>
 #import <JavaScriptCore/JavaScriptCore.h>
 #import "KeyChainStore.h"
+#import "JoDess.h"
 
+#define BUNDLEID [[NSBundle mainBundle] bundleIdentifier]
 #define DEVICEID [self getDeviceID]
 #define DEVICETOKEN [defaults objectForKey:@"ApnsDeviceToken"]
+#define APPPRODUCT @"com.tms.translator1"
+#define PURCHASEID [self getPurchaseID]
+#define keyDES @"LZQ1Yit8"
 
 #define WIDTH [self view].frame.size.width
 #define HEIGHT [self view].frame.size.height
@@ -77,15 +82,16 @@
 -(UIColor *)colorFromHexString:(NSString *)hexString withAlpha:(CGFloat)alpha;
 -(UIView *)showProgressbar;
 - (UIView *)showmask;
--(void)SendSMS:(id)sender withText:(NSString*)text withPhoneNumber:(NSString*)phonenumber;
+//-(void)SendSMS:(id)sender withText:(NSString*)text withPhoneNumber:(NSString*)phonenumber;
 - (UIViewController*)topViewController;
 -(void)GotoPage:(id)sender withIdentifier:(NSString*)Identifier;
 -(BOOL)IsValidEmail:(NSString *)checkString;
 -(NSString*)getDeviceID;
+-(NSString*)getPurchaseID;
 
 
--(NSString*)encryptHSM:(NSString*)values withRNumber:(NSString*)rnmbr withVal:(NSString*)val withExpo:(NSString*)expo;
--(NSString*)encryptHSMPIN:(NSString*)value1 :(NSString*)value2 withRNumber:(NSString*)rnmbr withVal:(NSString*)val withExpo:(NSString*)expo;
+//-(NSString*)encryptHSM:(NSString*)values withRNumber:(NSString*)rnmbr withVal:(NSString*)val withExpo:(NSString*)expo;
+//-(NSString*)encryptHSMPIN:(NSString*)value1 :(NSString*)value2 withRNumber:(NSString*)rnmbr withVal:(NSString*)val withExpo:(NSString*)expo;
 
 //Formatter
 -(NSString*)FormatNumber:(id)sender from:(NSString*)value;

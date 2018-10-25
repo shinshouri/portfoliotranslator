@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <StoreKit/StoreKit.h>
 
 @interface AppDelegate ()
 

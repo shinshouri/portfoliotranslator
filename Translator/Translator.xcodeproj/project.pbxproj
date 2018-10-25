@@ -14,6 +14,8 @@
 		000AA405217D7A05004A8580 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 000AA404217D7A05004A8580 /* main.m */; };
 		000AA411217D86A2004A8580 /* ParentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 000AA410217D86A2004A8580 /* ParentViewController.m */; };
 		004EC83821801EA8002FB5BF /* KeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 004EC83721801EA8002FB5BF /* KeyChainStore.m */; };
+		004EC83E218080E0002FB5BF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004EC83D218080E0002FB5BF /* StoreKit.framework */; };
+		00CCB3222181A9A800771B77 /* JoDess.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CCB3212181A9A800771B77 /* JoDess.m */; };
 		00EAB03A217ED6B2002DA2DB /* DetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00EAB039217ED6B2002DA2DB /* DetailCell.m */; };
 		00EAB03D217ED6F9002DA2DB /* ImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00EAB03C217ED6F9002DA2DB /* ImageCell.m */; };
 		00EAB043217F0FA2002DA2DB /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00EAB03F217F0FA2002DA2DB /* SideMenuViewController.m */; };
@@ -34,6 +36,9 @@
 		000AA410217D86A2004A8580 /* ParentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParentViewController.m; path = Translator/Class/ParentViewController.m; sourceTree = SOURCE_ROOT; };
 		004EC83621801EA8002FB5BF /* KeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeyChainStore.h; path = Translator/Class/KeyChainStore.h; sourceTree = SOURCE_ROOT; };
 		004EC83721801EA8002FB5BF /* KeyChainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeyChainStore.m; path = Translator/Class/KeyChainStore.m; sourceTree = SOURCE_ROOT; };
+		004EC83D218080E0002FB5BF /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		00CCB3202181A9A800771B77 /* JoDess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JoDess.h; path = Translator/Class/JoDess.h; sourceTree = SOURCE_ROOT; };
+		00CCB3212181A9A800771B77 /* JoDess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JoDess.m; path = Translator/Class/JoDess.m; sourceTree = SOURCE_ROOT; };
 		00EAB038217ED6B2002DA2DB /* DetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailCell.h; path = Translator/Class/DetailCell.h; sourceTree = SOURCE_ROOT; };
 		00EAB039217ED6B2002DA2DB /* DetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailCell.m; path = Translator/Class/DetailCell.m; sourceTree = SOURCE_ROOT; };
 		00EAB03B217ED6F9002DA2DB /* ImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageCell.h; path = Translator/Class/ImageCell.h; sourceTree = SOURCE_ROOT; };
@@ -51,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				004EC83E218080E0002FB5BF /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +68,7 @@
 			children = (
 				000AA3F4217D7A03004A8580 /* Translator */,
 				000AA3F3217D7A03004A8580 /* Products */,
+				004EC83C218080E0002FB5BF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -92,6 +99,8 @@
 		000AA40E217D8686004A8580 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				00CCB3202181A9A800771B77 /* JoDess.h */,
+				00CCB3212181A9A800771B77 /* JoDess.m */,
 				004EC83621801EA8002FB5BF /* KeyChainStore.h */,
 				004EC83721801EA8002FB5BF /* KeyChainStore.m */,
 				00EAB03B217ED6F9002DA2DB /* ImageCell.h */,
@@ -103,6 +112,14 @@
 			);
 			name = Class;
 			path = "New Group";
+			sourceTree = "<group>";
+		};
+		004EC83C218080E0002FB5BF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				004EC83D218080E0002FB5BF /* StoreKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		00EAB03E217F0F68002DA2DB /* View */ = {
@@ -149,6 +166,11 @@
 				TargetAttributes = {
 					000AA3F1217D7A03004A8580 = {
 						CreatedOnToolsVersion = 9.4.1;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -189,6 +211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00EAB043217F0FA2002DA2DB /* SideMenuViewController.m in Sources */,
+				00CCB3222181A9A800771B77 /* JoDess.m in Sources */,
 				000AA411217D86A2004A8580 /* ParentViewController.m in Sources */,
 				00EAB03A217ED6B2002DA2DB /* DetailCell.m in Sources */,
 				00EAB03D217ED6F9002DA2DB /* ImageCell.m in Sources */,
@@ -336,14 +359,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = QM2D28M7YY;
 				INFOPLIST_FILE = Translator/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tms.translator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "2c6d6ffc-3a64-449b-9603-de13e86ac411";
+				PROVISIONING_PROFILE_SPECIFIER = "TMS Translator Dev";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -352,14 +380,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Translator/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tms.translator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

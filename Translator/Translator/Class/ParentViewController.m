@@ -416,12 +416,15 @@
 }
 
 -(NSString*)getDeviceID {
-    
     if ([KeyChainStore load:@"DeviceID"]) {
         return [KeyChainStore load:@"DeviceID"];
     }
     [KeyChainStore save:@"DeviceID" data:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
     return [KeyChainStore load:@"DeviceID"];
+}
+
+-(NSString*)getPurchaseID {
+    return [KeyChainStore load:@"PurchaseID"];
 }
 
 #pragma mark - Alert

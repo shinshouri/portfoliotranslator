@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <StoreKit/StoreKit.h>
 #import "ParentViewController.h"
 
-@interface MainViewController : ParentViewController <UITableViewDelegate, UITableViewDataSource>
+@interface MainViewController : ParentViewController <UITextViewDelegate, UITableViewDelegate, UITableViewDataSource, SKPaymentTransactionObserver, SKProductsRequestDelegate>
 
 @end
