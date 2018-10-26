@@ -23,7 +23,7 @@
     UIImageView *img1, *img2;
     UILabel *lbl1, *lbl21;
     UITextView *txt1, *lbl22;
-    NSString *langCode1, *langCode2;
+    NSString *langCode1, *langCode2, *urlString;
     UITableView *table;
     UIAlertController *actionSheet1, *actionSheet2;
 }
@@ -42,6 +42,14 @@
     [self UI];
     langCode1 = @"af";
     langCode2 = @"af";
+    if ([defaults objectForKey:@"lang1"]) {
+        [lbl1 setText:[defaults objectForKey:@"lang1"]];
+        langCode1 = [defaults objectForKey:@"langcode1"];
+    }
+    if ([defaults objectForKey:@"lang2"]) {
+        [lbl21 setText:[defaults objectForKey:@"lang2"]];
+        langCode2 = [defaults objectForKey:@"langcode2"];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,12 +71,14 @@
     [[view1 layer] setBorderColor:[self colorFromHexString:Color3 withAlpha:0.5].CGColor];
     [[view1 layer] setCornerRadius:10];
     
-    img1 = [self UIImage:self withFrame:CGRectMake(10, 20, 25, 25) withImageName:@"star yellow"];
+    img1 = [self UIImage:self withFrame:CGRectMake(10, 10, 25, 25) withImageName:@"star yellow"];
+    [img1 setBackgroundColor:[UIColor blackColor]];
     [view1 addSubview:img1];
-    lbl1 = [self UILabel:self withFrame:CGRectMake(img1.frame.origin.x+img1.frame.size.width+10, img1.frame.origin.y, WIDTH-img1.frame.size.width, img1.frame.size.height) withText:@"Afrikaans" withTextSize:16 withAlignment:0 withLines:0];
+    lbl1 = [self UILabelwithWhiteText:self withFrame:CGRectMake(img1.frame.origin.x+img1.frame.size.width, img1.frame.origin.y, view1.frame.size.width-img1.frame.size.width-20, img1.frame.size.height) withText:@"Afrikaans" withTextSize:16 withAlignment:0 withLines:0];
+    [lbl1 setBackgroundColor:[UIColor blackColor]];
     [view1 addSubview:lbl1];
-    [view1 addSubview:[self UIImage:self withFrame:CGRectMake((WIDTH/2)+10, 26, 20, 10) withImageName:@"drop arrow"]];
-    [view1 addSubview:[self UIButton:self withFrame:CGRectMake(lbl1.frame.origin.x, lbl1.frame.origin.y, lbl1.frame.size.width, lbl1.frame.size.height+5) withTitle:@"" withTag:1]];
+//    [view1 addSubview:[self UIImage:self withFrame:CGRectMake((WIDTH/2)+10, 26, 20, 10) withImageName:@"drop arrow"]];
+    [view1 addSubview:[self UIButton:self withFrame:CGRectMake(img1.frame.origin.x, img1.frame.origin.y, view1.frame.size.width, lbl1.frame.size.height+5) withTitle:@"" withTag:1]];
     
     txt1 = [self UITextView:self withFrame:CGRectMake(img1.frame.origin.x, img1.frame.origin.y+img1.frame.size.height+10, view1.frame.size.width-20, view1.frame.size.height/2) withText:@"" withSize:20 withInputType:UIKeyboardTypeDefault];
     [txt1 setText:@""];
@@ -83,12 +93,14 @@
     [[view2 layer] setBorderColor:[self colorFromHexString:Color3 withAlpha:0.5].CGColor];
     [[view2 layer] setCornerRadius:10];
     
-    img2 = [self UIImage:self withFrame:CGRectMake(10, 20, 25, 25) withImageName:@"star yellow"];
+    img2 = [self UIImage:self withFrame:CGRectMake(10, 10, 25, 25) withImageName:@"star yellow"];
+    [img2 setBackgroundColor:[UIColor blackColor]];
     [view2 addSubview:img2];
-    lbl21 = [self UILabel:self withFrame:CGRectMake(img2.frame.origin.x+img2.frame.size.width+10, img2.frame.origin.y, WIDTH-img2.frame.size.width, img2.frame.size.height) withText:@"Afrikaans" withTextSize:16 withAlignment:0 withLines:0];
+    lbl21 = [self UILabelwithWhiteText:self withFrame:CGRectMake(img2.frame.origin.x+img2.frame.size.width, img2.frame.origin.y, view2.frame.size.width-img2.frame.size.width-20, img2.frame.size.height) withText:@"Afrikaans" withTextSize:16 withAlignment:0 withLines:0];
+    [lbl21 setBackgroundColor:[UIColor blackColor]];
     [view2 addSubview:lbl21];
-    [view2 addSubview:[self UIImage:self withFrame:CGRectMake((WIDTH/2)+10, 26, 20, 10) withImageName:@"drop arrow"]];
-    [view2 addSubview:[self UIButton:self withFrame:CGRectMake(lbl21.frame.origin.x, lbl21.frame.origin.y, lbl21.frame.size.width, lbl21.frame.size.height+5) withTitle:@"" withTag:2]];
+//    [view2 addSubview:[self UIImage:self withFrame:CGRectMake((WIDTH/2)+10, 26, 20, 10) withImageName:@"drop arrow"]];
+    [view2 addSubview:[self UIButton:self withFrame:CGRectMake(img2.frame.origin.x, img2.frame.origin.y, view2.frame.size.width, lbl21.frame.size.height+5) withTitle:@"" withTag:2]];
     
     lbl22 = [self UITextView:self withFrame:CGRectMake(img2.frame.origin.x, img2.frame.origin.y+img2.frame.size.height+10, view2.frame.size.width-20, view2.frame.size.height/2) withText:@"" withSize:20 withInputType:UIKeyboardTypeDefault];
     [lbl22 setEditable:NO];
@@ -97,7 +109,7 @@
     [view2 addSubview:lbl22];
     [bgview addSubview:view2];
     
-    UIButton *swap = [self UIButton:self withFrame:CGRectMake((WIDTH/2)-40, view1.frame.origin.y+view1.frame.size.height-35, 80, 80) withTitle:@"" withTag:3];
+    UIButton *swap = [self UIButton:self withFrame:CGRectMake((WIDTH)-100, view1.frame.origin.y+view1.frame.size.height-35, 80, 80) withTitle:@"" withTag:3];
     [swap setImage:[UIImage imageNamed:@"switch button"] forState:UIControlStateNormal];
 //    [swap sizeToFit];
     [bgview addSubview:swap];
@@ -133,6 +145,8 @@
             // OK button tapped.
             [self->lbl1 setText:[self->lang objectAtIndex:i]];
             self->langCode1 = [self->langCode objectAtIndex:i];
+            [self->defaults setObject:[self->lang objectAtIndex:i] forKey:@"lang1"];
+            [self->defaults setObject:[self->langCode objectAtIndex:i] forKey:@"langcode1"];
             [self dismissViewControllerAnimated:YES completion:^{
             }];
         }]];
@@ -151,6 +165,8 @@
             // OK button tapped.
             [self->lbl21 setText:[self->lang objectAtIndex:i]];
             self->langCode2 = [self->langCode objectAtIndex:i];
+            [self->defaults setObject:[self->lang objectAtIndex:i] forKey:@"lang2"];
+            [self->defaults setObject:[self->langCode objectAtIndex:i] forKey:@"langcode2"];
             [self dismissViewControllerAnimated:YES completion:^{
             }];
         }]];
@@ -188,22 +204,37 @@
             [self->view2 layoutIfNeeded];
         } completion:^(BOOL finished) {
             //code for completion
-            CGRect viewone = self->view1.frame;
-            CGRect viewtwo = self->view2.frame;
-            self->view1.frame = viewtwo;
-            self->view2.frame = viewone;
+//            CGRect viewone = self->view1.frame;
+//            CGRect viewtwo = self->view2.frame;
+//            self->view1.frame = viewtwo;
+//            self->view2.frame = viewone;
             NSString *swap1 = [self->lbl1 text];
             NSString *swap2 = [self->lbl21 text];
             NSString *codeswap1 = self->langCode1;
             NSString *codeswap2 = self->langCode2;
-            NSString *result1 = [self->txt1 text];
-            NSString *result2 = [self->lbl22 text];
-            [self->lbl1 setText:swap2];
-            [self->lbl21 setText:swap1];
+//            NSString *result1 = [self->txt1 text];
+//            NSString *result2 = [self->lbl22 text];
+//            [self->lbl1 setText:swap2];
+//            [self->lbl21 setText:swap1];
             self->langCode1 = codeswap2;
             self->langCode2 = codeswap1;
-            [self->txt1 setText:result2];
-            [self->lbl22 setText:result1];
+            [self->defaults setObject:swap2 forKey:@"lang1"];
+            [self->defaults setObject:swap1 forKey:@"lang2"];
+            [self->defaults setObject:codeswap2 forKey:@"langcode1"];
+            [self->defaults setObject:codeswap1 forKey:@"langcode2"];
+//            [self->txt1 setText:result2];
+//            [self->lbl22 setText:result1];
+            if ([self->txt1 isEditable]) {
+                [self->txt1 setEditable:NO];
+                [self->lbl22 setEditable:YES];
+                [self->lbl22 becomeFirstResponder];
+            } else
+            {
+                [self->txt1 setEditable:YES];
+                [self->lbl22 setEditable:NO];
+                [self->txt1 becomeFirstResponder];
+            }
+            
         }];
     }
     else if([sender tag] == 4)
@@ -218,6 +249,10 @@
             [self showAlert:@"Can't Make Payments" title:@"Warning!" btn:@"OK" tag:0 delegate:self];
         }
 //        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=284417350&mt=8&uo=6"] options:@{} completionHandler:nil];
+    }
+    else if([sender tag] == 5)
+    {
+        [self OpenURL:urlString];
     }
 }
 
@@ -238,9 +273,9 @@
     [[viewd layer] setBorderColor:[self colorFromHexString:Color3 withAlpha:0.5].CGColor];
     [[viewd layer] setCornerRadius:10];
     
-//    [view1 addSubview:[self UIImage:self withFrame:CGRectMake(10, 10, 25, 25) withImageName:@"star yellow"]];
-//    [view1 addSubview:[self UILabel:self withFrame:CGRectMake(img1.frame.origin.x+img1.frame.size.width+10, img1.frame.origin.y, WIDTH-img1.frame.size.width, img1.frame.size.height) withText:[lbl1 text] withTextSize:16 withAlignment:0 withLines:0]];
-//    [view1 addSubview:[self UIButton:self withFrame:CGRectMake(lbl1.frame.origin.x, lbl1.frame.origin.y, lbl1.frame.size.width, lbl1.frame.size.height) withTitle:@"" withTag:1]];
+//    [viewd addSubview:[self UIImage:self withFrame:CGRectMake(10, 10, 25, 25) withImageName:@"star yellow"]];
+    [viewd addSubview:[self UILabelwithBlackText:self withFrame:CGRectMake(10, img1.frame.origin.y, WIDTH-img1.frame.size.width, img1.frame.size.height) withText:[[listHistory objectAtIndex:[index row]] objectForKey:@"From"] withTextSize:16 withAlignment:0 withLines:0]];
+//    [viewd addSubview:[self UIButton:self withFrame:CGRectMake(lbl1.frame.origin.x, lbl1.frame.origin.y, lbl1.frame.size.width, lbl1.frame.size.height) withTitle:@"" withTag:1]];
     
     [viewd addSubview:[self UILabel:self withFrame:CGRectMake(img1.frame.origin.x, img1.frame.origin.y+img1.frame.size.height+10, viewd.frame.size.width-20, viewd.frame.size.height/2) withText:[[listHistory objectAtIndex:[index row]] objectForKey:@"Search"] withTextSize:20 withAlignment:0 withLines:0]];
     [detail addSubview: viewd];
@@ -251,9 +286,9 @@
     [[viewd2 layer] setBorderColor:[self colorFromHexString:Color3 withAlpha:0.5].CGColor];
     [[viewd2 layer] setCornerRadius:10];
     
-//    [view2 addSubview:[self UIImage:self withFrame:CGRectMake(10, 10, 25, 25) withImageName:@"star yellow"]];
-//    [view2 addSubview:[self UILabel:self withFrame:CGRectMake(img2.frame.origin.x+img2.frame.size.width+10, img2.frame.origin.y, WIDTH-img2.frame.size.width, img2.frame.size.height) withText:[lbl21 text] withTextSize:16 withAlignment:0 withLines:0]];
-//    [view2 addSubview:[self UIButton:self withFrame:CGRectMake(lbl21.frame.origin.x, lbl21.frame.origin.y, lbl21.frame.size.width, lbl21.frame.size.height) withTitle:@"" withTag:2]];
+//    [viewd2 addSubview:[self UIImage:self withFrame:CGRectMake(10, 10, 25, 25) withImageName:@"star yellow"]];
+    [viewd2 addSubview:[self UILabelwithBlackText:self withFrame:CGRectMake(10, img2.frame.origin.y, WIDTH-img2.frame.size.width, img2.frame.size.height) withText:[[listHistory objectAtIndex:[index row]] objectForKey:@"To"] withTextSize:16 withAlignment:0 withLines:0]];
+//    [viewd2 addSubview:[self UIButton:self withFrame:CGRectMake(lbl21.frame.origin.x, lbl21.frame.origin.y, lbl21.frame.size.width, lbl21.frame.size.height) withTitle:@"" withTag:2]];
     
     [viewd2 addSubview:[self UILabel:self withFrame:CGRectMake(img2.frame.origin.x, img2.frame.origin.y+img2.frame.size.height+10, viewd2.frame.size.width-20, viewd2.frame.size.height/2) withText:[[listHistory objectAtIndex:[index row]] objectForKey:@"Result"] withTextSize:20 withAlignment:0 withLines:0]];
     [detail addSubview:viewd2];
@@ -262,16 +297,19 @@
     [[self view] addSubview:detail];
 }
 
--(void)showAds:(NSString*)url {
+-(void)showAds:(NSString*)url withImage:(NSString*)img {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSData * data = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString:url]];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self->maskView removeFromSuperview];
             [self->ads removeFromSuperview];
-            self->ads = [self UIView:self withFrame:CGRectMake(0, HEIGHT-150, WIDTH, 150)];
+            self->ads = [self UIView:self withFrame:CGRectMake(0, HEIGHT-HEIGHT/8, WIDTH, HEIGHT/8)];
             UIImageView *imgads = [self UIImage:self withFrame:CGRectMake(0, 0, WIDTH, self->ads.frame.size.height) withImageName:@"logo_small"];
             imgads.image = [UIImage imageWithData:data];
             [self->ads addSubview:imgads];
+            
+            self->urlString = img;
+            [self->ads addSubview:[self UIButton:self withFrame:CGRectMake(0, 0, WIDTH, self->ads.frame.size.height) withTitle:@"" withTag:5]];
             
             UIButton *btn = [self UIButton:self withFrame:CGRectMake(WIDTH-100, 0, 100, 30) withTitle:@"Close Ads" withTag:4];
             [btn setBackgroundColor:[UIColor whiteColor]];
@@ -284,6 +322,15 @@
             [[self view] addSubview:self->ads];
         });        
     });
+}
+
+-(void)OpenURL:(NSString*)url {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+//    if (@available(iOS 10.0, *)) {
+//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url] options:@{} completionHandler:nil];
+//    } else {
+//        // Fallback on earlier versions
+//    }
 }
 
 #pragma mark - In-App Purchase
@@ -457,52 +504,52 @@
 //}
 
 #pragma mark - Pickerview Delegate
--(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
-    return 1;
-}
-
--(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-    if ([pickerView tag] == 1)
-    {
-        return [lang count];
-    }
-    else if([pickerView tag] == 2)
-    {
-        return [lang count];
-    }
-    
-    return 0;
-}
-
--(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    if ([pickerView tag] == 1)
-    {
-        return [lang objectAtIndex:row];
-    }
-    else if ([pickerView tag] == 2)
-    {
-        return [lang objectAtIndex:row];
-    }
-    
-    return 0;
-}
-
--(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    if ([pickerView tag] == 1)
-    {
-        if ([pickerView selectedRowInComponent:0] == row) {
-            
-        }
-        [lbl1 setText:[lang objectAtIndex:row]];
-        langCode1 = [langCode objectAtIndex:row];
-    }
-    else if ([pickerView tag] == 2)
-    {
-        [lbl21 setText:[lang objectAtIndex:row]];
-        langCode2 = [langCode objectAtIndex:row];
-    }
-//    [picker removeFromSuperview];
-}
+//-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+//    return 1;
+//}
+//
+//-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+//    if ([pickerView tag] == 1)
+//    {
+//        return [lang count];
+//    }
+//    else if([pickerView tag] == 2)
+//    {
+//        return [lang count];
+//    }
+//
+//    return 0;
+//}
+//
+//-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+//    if ([pickerView tag] == 1)
+//    {
+//        return [lang objectAtIndex:row];
+//    }
+//    else if ([pickerView tag] == 2)
+//    {
+//        return [lang objectAtIndex:row];
+//    }
+//
+//    return 0;
+//}
+//
+//-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+//    if ([pickerView tag] == 1)
+//    {
+//        if ([pickerView selectedRowInComponent:0] == row) {
+//
+//        }
+//        [lbl1 setText:[lang objectAtIndex:row]];
+//        langCode1 = [langCode objectAtIndex:row];
+//    }
+//    else if ([pickerView tag] == 2)
+//    {
+//        [lbl21 setText:[lang objectAtIndex:row]];
+//        langCode2 = [langCode objectAtIndex:row];
+//    }
+////    [picker removeFromSuperview];
+//}
 
 #pragma mark - TextView Delegate
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
@@ -523,8 +570,8 @@
         [maskView removeFromSuperview];
         [[self view] addSubview:[self showmask]];
         response = nil;
-        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:[txt1 text], @"text", langCode1, @"from", langCode2, @"to", nil];
-        
+        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:[self->txt1 isEditable] ? [txt1 text] : [lbl22 text], @"text", langCode1, @"from", langCode2, @"to", nil];
+        NSLog(@"params = %@", params);
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
             NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
@@ -543,17 +590,34 @@
                     NSLog(@"response = %@", [self->response objectForKey:@"result"]);
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self->maskView removeFromSuperview];
-                        [self->lbl22 setText:[[self->response objectForKey:@"result"] objectForKey:@"text"]];
-                        if (![[self->lbl22 text] isEqualToString:[self->txt1 text]] && ![[self->lbl22 text] isEqualToString:@"#ERROR!"])
-                        {
-                            NSDictionary *dictHist = [NSDictionary dictionaryWithObjectsAndKeys:[self->txt1 text], @"Search", [self->lbl22 text], @"Result", nil];
-                            if ([self->listHistory count] >= 10) {
-                                [self->listHistory removeObjectAtIndex:9];
+                        if ([self->txt1 isEditable]) {
+                            [self->lbl22 setText:[[self->response objectForKey:@"result"] objectForKey:@"text"]];
+                            if (![[self->lbl22 text] isEqualToString:[self->txt1 text]] && ![[self->lbl22 text] containsString:@"#"])
+                            {
+                                NSDictionary *dictHist = [NSDictionary dictionaryWithObjectsAndKeys:[self->lbl1 text], @"From", [self->lbl21 text], @"To", [self->txt1 text], @"Search", [self->lbl22 text], @"Result", nil];
+                                if ([self->listHistory count] >= 10) {
+                                    [self->listHistory removeObjectAtIndex:9];
+                                }
+                                [self->listHistory insertObject:dictHist atIndex:0];
+                                [self->defaults setObject:self->listHistory forKey:@"ListHistory"];
+                                [self->table reloadData];
                             }
-                            [self->listHistory insertObject:dictHist atIndex:0];
-                            [self->defaults setObject:self->listHistory forKey:@"ListHistory"];
-                            [self->table reloadData];
                         }
+                        else
+                        {
+                            [self->txt1 setText:[[self->response objectForKey:@"result"] objectForKey:@"text"]];
+                            if (![[self->lbl22 text] isEqualToString:[self->txt1 text]] && ![[self->txt1 text] containsString:@"#"])
+                            {
+                                NSDictionary *dictHist = [NSDictionary dictionaryWithObjectsAndKeys:[self->lbl21 text], @"From", [self->lbl1 text], @"To", [self->lbl22 text], @"Search", [self->txt1 text], @"Result", nil];
+                                if ([self->listHistory count] >= 10) {
+                                    [self->listHistory removeObjectAtIndex:9];
+                                }
+                                [self->listHistory insertObject:dictHist atIndex:0];
+                                [self->defaults setObject:self->listHistory forKey:@"ListHistory"];
+                                [self->table reloadData];
+                            }
+                        }
+                        
                         if (!PURCHASEID) {
                             [self RequestAPIAds:self];
                         }
@@ -595,9 +659,9 @@
                 if(error == nil)
                 {
                     self->response = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-                    NSLog(@"response = %@", [[self->response objectForKey:@"advertise"] objectAtIndex:0]);
+//                    NSLog(@"response = %@", [[self->response objectForKey:@"advertise"] objectAtIndex:0]);
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self showAds:[[[self->response objectForKey:@"advertise"] objectAtIndex:0] objectForKey:@"url"]];
+                        [self showAds:[[[self->response objectForKey:@"advertise"] objectAtIndex:0] objectForKey:@"image_url"] withImage:[[[self->response objectForKey:@"advertise"] objectAtIndex:0] objectForKey:@"url"]];
                     });
                 }
                 else
