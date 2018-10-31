@@ -104,6 +104,7 @@
     
     lbl22 = [self UITextView:self withFrame:CGRectMake(img2.frame.origin.x, img2.frame.origin.y+img2.frame.size.height+10, view2.frame.size.width-20, view2.frame.size.height/2) withText:@"" withSize:20 withInputType:UIKeyboardTypeDefault];
     [lbl22 setEditable:NO];
+    [lbl22 setReturnKeyType:UIReturnKeyGo];
     [lbl22 setSelectable:NO];
 //    lbl22 = [self UILabel:self withFrame:CGRectMake(img2.frame.origin.x, img2.frame.origin.y+img2.frame.size.height+10, view2.frame.size.width-20, view2.frame.size.height/2) withText:@"" withTextSize:20 withAlignment:0 withLines:0];
     [view2 addSubview:lbl22];
@@ -145,8 +146,9 @@
             // OK button tapped.
             [self->lbl1 setText:[self->lang objectAtIndex:i]];
             self->langCode1 = [self->langCode objectAtIndex:i];
-            [self->defaults setObject:[self->lang objectAtIndex:i] forKey:@"lang1"];
-            [self->defaults setObject:[self->langCode objectAtIndex:i] forKey:@"langcode1"];
+            [self->defaults setObject:[self->lbl1 text] forKey:@"lang1"];
+            [self->defaults setObject:self->langCode1 forKey:@"langcode1"];
+            [self->defaults synchronize];
             [self dismissViewControllerAnimated:YES completion:^{
             }];
         }]];
@@ -165,8 +167,9 @@
             // OK button tapped.
             [self->lbl21 setText:[self->lang objectAtIndex:i]];
             self->langCode2 = [self->langCode objectAtIndex:i];
-            [self->defaults setObject:[self->lang objectAtIndex:i] forKey:@"lang2"];
-            [self->defaults setObject:[self->langCode objectAtIndex:i] forKey:@"langcode2"];
+            [self->defaults setObject:[self->lbl21 text] forKey:@"lang2"];
+            [self->defaults setObject:self->langCode2 forKey:@"langcode2"];
+            [self->defaults synchronize];
             [self dismissViewControllerAnimated:YES completion:^{
             }];
         }]];
@@ -204,36 +207,35 @@
             [self->view2 layoutIfNeeded];
         } completion:^(BOOL finished) {
             //code for completion
-//            CGRect viewone = self->view1.frame;
-//            CGRect viewtwo = self->view2.frame;
-//            self->view1.frame = viewtwo;
-//            self->view2.frame = viewone;
+            CGRect viewone = self->view1.frame;
+            CGRect viewtwo = self->view2.frame;
+            self->view1.frame = viewtwo;
+            self->view2.frame = viewone;
             NSString *swap1 = [self->lbl1 text];
             NSString *swap2 = [self->lbl21 text];
             NSString *codeswap1 = self->langCode1;
             NSString *codeswap2 = self->langCode2;
-//            NSString *result1 = [self->txt1 text];
-//            NSString *result2 = [self->lbl22 text];
-//            [self->lbl1 setText:swap2];
-//            [self->lbl21 setText:swap1];
+            NSString *result1 = [self->txt1 text];
+            NSString *result2 = [self->lbl22 text];
+            [self->lbl1 setText:swap2];
+            [self->lbl21 setText:swap1];
             self->langCode1 = codeswap2;
             self->langCode2 = codeswap1;
             [self->defaults setObject:swap2 forKey:@"lang1"];
             [self->defaults setObject:swap1 forKey:@"lang2"];
             [self->defaults setObject:codeswap2 forKey:@"langcode1"];
             [self->defaults setObject:codeswap1 forKey:@"langcode2"];
-//            [self->txt1 setText:result2];
-//            [self->lbl22 setText:result1];
-            if ([self->txt1 isEditable]) {
-                [self->txt1 setEditable:NO];
-                [self->lbl22 setEditable:YES];
-                [self->lbl22 becomeFirstResponder];
-            } else
-            {
-                [self->txt1 setEditable:YES];
-                [self->lbl22 setEditable:NO];
-                [self->txt1 becomeFirstResponder];
-            }
+            [self->defaults synchronize];
+            [self->txt1 setText:result2];
+            [self->lbl22 setText:result1];
+//            if ([self->txt1 isEditable]) {
+//                [self->txt1 setEditable:NO];
+//                [self->lbl22 setEditable:YES];
+//            } else
+//            {
+//                [self->txt1 setEditable:YES];
+//                [self->lbl22 setEditable:NO];
+//            }
             
         }];
     }
@@ -252,7 +254,7 @@
     }
     else if([sender tag] == 5)
     {
-        [self OpenURL:urlString];
+        [self openURL:urlString];
     }
 }
 
@@ -303,7 +305,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self->maskView removeFromSuperview];
             [self->ads removeFromSuperview];
-            self->ads = [self UIView:self withFrame:CGRectMake(0, HEIGHT-HEIGHT/8, WIDTH, HEIGHT/8)];
+            self->ads = [self UIView:self withFrame:CGRectMake(0, HEIGHT-HEIGHT/9, WIDTH, HEIGHT/9)];
             UIImageView *imgads = [self UIImage:self withFrame:CGRectMake(0, 0, WIDTH, self->ads.frame.size.height) withImageName:@"logo_small"];
             imgads.image = [UIImage imageWithData:data];
             [self->ads addSubview:imgads];
@@ -311,11 +313,11 @@
             self->urlString = img;
             [self->ads addSubview:[self UIButton:self withFrame:CGRectMake(0, 0, WIDTH, self->ads.frame.size.height) withTitle:@"" withTag:5]];
             
-            UIButton *btn = [self UIButton:self withFrame:CGRectMake(WIDTH-100, 0, 100, 30) withTitle:@"Close Ads" withTag:4];
+            UIButton *btn = [self UIButton:self withFrame:CGRectMake(WIDTH-100, 0, 100, self->ads.frame.size.height/4) withTitle:@"Close Ads" withTag:4];
             [btn setBackgroundColor:[UIColor whiteColor]];
             [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [[btn layer] setBorderWidth:1];
-            [[btn layer] setBorderColor:[UIColor blackColor].CGColor];
+//            [[btn layer] setBorderWidth:1];
+//            [[btn layer] setBorderColor:[UIColor blackColor].CGColor];
             [[btn layer] setCornerRadius:10];
             [self->ads addSubview:btn];
             
@@ -324,13 +326,12 @@
     });
 }
 
--(void)OpenURL:(NSString*)url {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
-//    if (@available(iOS 10.0, *)) {
-//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url] options:@{} completionHandler:nil];
-//    } else {
-//        // Fallback on earlier versions
-//    }
+-(void)openURL:(NSString*)url {
+    if (@available(iOS 10.0, *)) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url] options:@{} completionHandler:nil];
+    } else {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    }
 }
 
 #pragma mark - In-App Purchase
@@ -570,7 +571,7 @@
         [maskView removeFromSuperview];
         [[self view] addSubview:[self showmask]];
         response = nil;
-        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:[self->txt1 isEditable] ? [txt1 text] : [lbl22 text], @"text", langCode1, @"from", langCode2, @"to", nil];
+        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:[txt1 text], @"text", langCode1, @"from", langCode2, @"to", nil];
         NSLog(@"params = %@", params);
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -590,7 +591,7 @@
                     NSLog(@"response = %@", [self->response objectForKey:@"result"]);
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self->maskView removeFromSuperview];
-                        if ([self->txt1 isEditable]) {
+//                        if ([self->txt1 isEditable]) {
                             [self->lbl22 setText:[[self->response objectForKey:@"result"] objectForKey:@"text"]];
                             if (![[self->lbl22 text] isEqualToString:[self->txt1 text]] && ![[self->lbl22 text] containsString:@"#"])
                             {
@@ -602,21 +603,21 @@
                                 [self->defaults setObject:self->listHistory forKey:@"ListHistory"];
                                 [self->table reloadData];
                             }
-                        }
-                        else
-                        {
-                            [self->txt1 setText:[[self->response objectForKey:@"result"] objectForKey:@"text"]];
-                            if (![[self->lbl22 text] isEqualToString:[self->txt1 text]] && ![[self->txt1 text] containsString:@"#"])
-                            {
-                                NSDictionary *dictHist = [NSDictionary dictionaryWithObjectsAndKeys:[self->lbl21 text], @"From", [self->lbl1 text], @"To", [self->lbl22 text], @"Search", [self->txt1 text], @"Result", nil];
-                                if ([self->listHistory count] >= 10) {
-                                    [self->listHistory removeObjectAtIndex:9];
-                                }
-                                [self->listHistory insertObject:dictHist atIndex:0];
-                                [self->defaults setObject:self->listHistory forKey:@"ListHistory"];
-                                [self->table reloadData];
-                            }
-                        }
+//                        }
+//                        else
+//                        {
+//                            [self->txt1 setText:[[self->response objectForKey:@"result"] objectForKey:@"text"]];
+//                            if (![[self->lbl22 text] isEqualToString:[self->txt1 text]] && ![[self->txt1 text] containsString:@"#"])
+//                            {
+//                                NSDictionary *dictHist = [NSDictionary dictionaryWithObjectsAndKeys:[self->lbl21 text], @"From", [self->lbl1 text], @"To", [self->lbl22 text], @"Search", [self->txt1 text], @"Result", nil];
+//                                if ([self->listHistory count] >= 10) {
+//                                    [self->listHistory removeObjectAtIndex:9];
+//                                }
+//                                [self->listHistory insertObject:dictHist atIndex:0];
+//                                [self->defaults setObject:self->listHistory forKey:@"ListHistory"];
+//                                [self->table reloadData];
+//                            }
+//                        }
                         
                         if (!PURCHASEID) {
                             [self RequestAPIAds:self];
@@ -659,9 +660,11 @@
                 if(error == nil)
                 {
                     self->response = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-//                    NSLog(@"response = %@", [[self->response objectForKey:@"advertise"] objectAtIndex:0]);
+                    NSLog(@"response = %@", [[self->response objectForKey:@"advertise"] objectAtIndex:0]);
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self showAds:[[[self->response objectForKey:@"advertise"] objectAtIndex:0] objectForKey:@"image_url"] withImage:[[[self->response objectForKey:@"advertise"] objectAtIndex:0] objectForKey:@"url"]];
+                        if ([[[[self->response objectForKey:@"advertise"] objectAtIndex:0] objectForKey:@"is_open"] isEqualToString:@"1"]) {
+                            [self showAds:[[[self->response objectForKey:@"advertise"] objectAtIndex:0] objectForKey:@"image_url"] withImage:[[[self->response objectForKey:@"advertise"] objectAtIndex:0] objectForKey:@"url"]];
+                        }
                     });
                 }
                 else
